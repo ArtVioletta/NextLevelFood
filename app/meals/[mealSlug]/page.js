@@ -1,6 +1,8 @@
+import Image from 'next/image'
+import { notFound } from 'next/navigation'
+
 import { getMeal } from '@/lib/meals'
 import styles from './page.module.css'
-import Image from 'next/image'
 
 export default function MealDetailsPage({ params }) {
     const meal = getMeal(params.mealSlug)
@@ -18,7 +20,7 @@ export default function MealDetailsPage({ params }) {
                     <Image src={meal.image} alt={meal.title} fill />
                 </div>
                 <div className={styles.headerText}>
-                    <h1>TITLE</h1>
+                    <h1>{meal.title}</h1>
                     <p className={styles.creator}>
                         by{' '}
                         <a href={`mailto:${meal.creator_email}`}>
@@ -28,14 +30,13 @@ export default function MealDetailsPage({ params }) {
                     <p className={styles.summary}>{meal.summary}</p>
                 </div>
             </header>
-
             <main>
                 <p
                     className={styles.instructions}
-                    dangerouslySetInnerHTML={{ __html: meal.instructions }}
-                >
-                    {' '}
-                </p>
+                    dangerouslySetInnerHTML={{
+                        __html: meal.instructions,
+                    }}
+                ></p>
             </main>
         </>
     )

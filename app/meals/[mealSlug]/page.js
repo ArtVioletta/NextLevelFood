@@ -5,6 +5,7 @@ import { getMeal } from '@/lib/meals'
 import styles from './page.module.css'
 
 export default function MealDetailsPage({ params }) {
+    console.log(params.mealSlug, 'params.mealSlug')
     const meal = getMeal(params.mealSlug)
 
     if (!meal) {
